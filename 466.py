@@ -3,7 +3,10 @@ def _p(m, n):
     while i <= m:
         j = 1
         while j <= n:
-            yield i * j
+            if j >= i:
+                yield i * j
+            if i == 1:
+                break
             j += 1
         i += 1
 
@@ -11,9 +14,11 @@ def _p(m, n):
 def P(m, n):
     distinct_terms = set()
     for val in _p(m, n):
+        if val < n:
+            continue
         if val not in distinct_terms:
             distinct_terms.add(val)
-    print len(distinct_terms)
+    print len(distinct_terms) + n - 1
 
 
 P(64, 64)
